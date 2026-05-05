@@ -1,0 +1,7 @@
+fastapi>=0.116.0
+faiss-cpu>=1.8.0
+numpy>=1.26.0
+pydantic>=2.8.0
+pypdf>=5.0.0
+python-multipart>=0.0.9
+uvicorn>=0.35.0
