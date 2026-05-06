@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Match Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/assets/styles.css">
+</head>
+
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+  <header class="topbar topbar--elevated">
+    <div class="brand">
+      <div class="brand-row">
+        <h1>Job Match Studio</h1>
+        <div class="brand-meta">
+          <div id="health-pill" class="pill">Checking backend</div>
+        </div>
+      </div>
+      <p class="brand-sub">Upload your resume, define your target role profile, and review live openings with tailored
+        improvement guidance.</p>
+    </div>
+
+    <nav class="topbar-controls" aria-label="Topbar controls">
+      <div class="search-actions" role="toolbar" aria-label="Actions">
+        <button id="new-search-btn" class="btn btn-primary" type="button">New Search</button>
+        <button id="new-resume-btn" class="btn btn-secondary" type="button">New Resume</button>
+      </div>
+      <div class="profile-area">
+        <div id="profile-chip" class="pill muted">No profile loaded</div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="workspace">
+    <section id="input-phase" class="input-phase">
+      <article class="panel panel-narrow">
+        <h2>Resume Upload</h2>
+        <p class="subtle">Start by uploading your latest resume.</p>
+        <form id="resume-form" class="form-grid">
+          <label class="field">
+            <span>Resume file</span>
+            <input type="file" name="file" accept=".txt,.md,.docx,.pdf" required>
+          </label>
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" name="name" placeholder="Jane Candidate" required>
+          </label>
+          <button type="submit" class="btn btn-primary">Upload Resume</button>
+        </form>
+      </article>
+
+      <article class="panel panel-wide" id="target-section" style="display:none;">
+        <h2>Target Job Details</h2>
+        <p class="subtle">Tell the system what role profile to optimize for and where you want to work.</p>
+        <form id="target-form" class="form-grid">
+          <div class="row row-2">
+            <label class="field">
+              <span>Target position</span>
+              <input type="text" name="target_position" placeholder="Backend Engineer" required>
+            </label>
+            <label class="field">
+              <span>Years of experience</span>
+              <input type="number" name="years_experience" min="0" max="50" placeholder="2" required>
+            </label>
+          </div>
+          <div class="row row-2">
+            <label class="field">
+              <span>Preferred location</span>
+              <input type="text" name="locations" placeholder="Toronto, Remote">
+            </label>
+            <label class="field">
+              <span>Work mode</span>
+              <select name="work_mode">
+                <option value="flexible">Flexible</option>
+                <option value="remote">Remote</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onsite">On-site</option>
+              </select>
+            </label>
+          </div>
+          <div class="row row-2">
+            <label class="field">
+              <span>Related titles (optional)</span>
+              <input type="text" name="target_roles" placeholder="Platform Engineer, API Engineer">
+            </label>
+            <label class="field">
+              <span>Keywords (optional)</span>
+              <input type="text" name="keywords" placeholder="Python, FastAPI, microservices">
+            </label>
+          </div>
+          <div class="row row-2">
+            <label class="field">
+              <span>Target companies (optional)</span>
+              <input type="text" name="companies_include" placeholder="Google, Stripe, Shopify">
+            </label>
+            <label class="field">
+              <span>Minimum salary (optional)</span>
+              <input type="number" name="salary_min" placeholder="100000">
+            </label>
+          </div>
+          <label class="field">
+            <span>Additional context (optional)</span>
+            <textarea name="goal" rows="3"
+              placeholder="Example: I want backend roles in product companies with strong ownership and distributed systems work."></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary">Find Matching Jobs</button>
+        </form>
+      </article>
+    </section>
+
+    <section id="results-phase" class="results-phase" style="display:none;">
+      <article id="run-overview" class="panel panel-hero"></article>
+      <article id="warning-panel" class="panel warning-panel"></article>
+
+      <div class="grid two-col">
+        <article class="panel">
+          <div class="section-header">
+            <div>
+              <h3>Top Job Openings</h3>
+              <p class="subtle compact">Most relevant live openings based on your resume and target role details.</p>
+            </div>
+            <span id="jobs-count" class="pill muted">0 jobs</span>
+          </div>
+          <div id="jobs-list" class="jobs-list"></div>
+          <button id="load-more-btn" class="btn btn-secondary" style="display:none;">More Jobs</button>
+        </article>
+
+        <article class="panel">
+          <h3>Job Details</h3>
+          <p class="subtle compact">Click any job card to review full role context and match rationale.</p>
+          <div id="job-detail" class="detail-body"></div>
+        </article>
+      </div>
+
+      <div class="grid two-col">
+        <article class="panel">
+          <h3>Resume Improvements</h3>
+          <div id="resume-insights"></div>
+        </article>
+        <article class="panel">
+          <h3>Skill Improvements</h3>
+          <div id="skill-insights"></div>
+        </article>
+      </div>
+
+      <div class="grid two-col">
+        <article class="panel">
+          <h3>Your Profile</h3>
+          <div id="profile-summary"></div>
+        </article>
+        <article class="panel">
+          <h3>Recent Analyses</h3>
+          <div id="run-history"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-stack" id="toast-stack"></div>
+  <script src="/static/assets/app.js" defer></script>
+</body>
+
+</html>
