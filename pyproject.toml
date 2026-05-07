@@ -1,0 +1,22 @@
+[project]
+name = "autonomous-job-application-agent"
+version = "0.1.0"
+description = "Human-supervised autonomous job application agent starter"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "faiss-cpu>=1.8.0",
+  "fastapi>=0.116.0",
+  "numpy>=1.26.0",
+  "pydantic>=2.8.0",
+  "pypdf>=5.0.0",
+  "python-multipart>=0.0.9",
+  "uvicorn>=0.35.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["backend*"]
