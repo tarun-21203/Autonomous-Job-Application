@@ -128,8 +128,8 @@ API groups (prefixes):
 ```
 ┌─────────────────┐    ┌────────────────────────┐    ┌─────────────────┐
 │   Frontend      │    │      Backend/API       │    │   Persistence   │
-│ (static UI)     │◄──►│  FastAPI + Agents      │◄──►│  SQLite + FAISS  │
-│ index.html      │    │  RAG / Vector Memory   │    │  (data/faiss/)   │
+│ (static UI)     │◄──►│  FastAPI + Agents      │◄──►│  SQLite + FAISS │
+│ index.html      │    │  RAG / Vector Memory   │    │  (data/faiss/)  │
 └─────────────────┘    └────────────────────────┘    └─────────────────┘
 ```
 
